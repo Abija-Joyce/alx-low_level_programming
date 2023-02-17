@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 /* main - Prints the last digit of a randomly generated number
@@ -24,4 +25,4 @@ int main(void)
 		printf("Last didgit of %d is %d and is 0\n", n,n % 10);
 	}
 	return (0);
-}i
+}
