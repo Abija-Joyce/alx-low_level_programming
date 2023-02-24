@@ -15,12 +15,12 @@ int main(void)
 			prime /= 2;
 			continue;
 		}
-		for (div = 3; div, (prime / 2); div += 2)
+		for (div = 3; div < (prime / 2); div += 2)
 		{
 			if ((prime % div) == 0)
 				prime /= div;
 		}
 	}
-	printf("%d\n", prime);
+	printf("%ld\n", prime);
 	return (0);
 }

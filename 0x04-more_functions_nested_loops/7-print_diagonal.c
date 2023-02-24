@@ -5,7 +5,7 @@
  * @n: Char
 */
 
-void print_diagonal(iny n)
+void print_diagonal(int n)
 {
 	int line, gap;
 
