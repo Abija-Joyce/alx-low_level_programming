@@ -1,4 +1,5 @@
 #include "main.h"
+#inlude <string.h>
 
 /**
  * int _strlen - String length
