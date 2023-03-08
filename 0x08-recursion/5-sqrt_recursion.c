@@ -1,17 +1,16 @@
 #include "main.h"
 
 /**
- * help - helps sqrt function find sqrt
- * @n: needs to be sqrt
- * @x: sqrt of n
+ * _sqrt_recursion - helps sqrt function find sqrt
+ * @n: needs to be sqr
  * Return: natural sqrt of n
  */
 
-int help(int n, int x)
+int _sqrt_recursion(int n)
 {
 	if (x * x == n)
 		return (x);
 	else if (x * x < n)
-		return (help(n, ++x));
+		return (_sqrt_recursion(n, ++x));
 	return (-1);
 }

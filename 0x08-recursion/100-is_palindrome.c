@@ -1,16 +1,10 @@
 #include "main.h"
-
 /**
- * get_length - gets length of string
- * @str: pointer to a string
- * @len: length of a string
- * Return: return length of string
- */
-int get_length(char *str, int len)
+* is_palindrome - Prints out
+* @s: pointer variable
+* Return: int
+*/
+int is_palindrome(char *s)
 {
-	if (*(str + len) != '\0')
-	{
-		return (get_length(str, ++len));
-	}
-	return (--len);
+	return (check_pali(s, s, get_length(s, 0)));
 }
