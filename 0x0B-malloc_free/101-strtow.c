@@ -1,52 +1,85 @@
+#include <stddef.h>
+#include <stdlib.h>
 #include "main.h"
+/**
+ * copychars - copies chars to buffer
+ * @b: destination buffer
+ * @start: starting char pointer
+ * @stop: ending char pointer
+ */
+void copychars(char *b, char *start, char *stop)
+{
+	while (start <= stop)
+		*b++ = *start++;
+	*b = 0;
+}
 
 /**
-*strtow - splits a stirng into words
-*@str: string to be splitted
-*
-*Return: pointer to the array of splitted words
-*/
+ * wordcount - counts the number of words
+ * @str: the sentence string
+ *
+ * Return: int number of words
+ */
+int wordcount(char *str)
+{
+	int words = 0, in_word = 0;
 
+	while (1)
+	{
+		if (*str == ' ' || !*str)
+		{
+			if (in_word)
+				words++;
+			in_word = 0;
+			if (!*str)
+				break;
+		}
+		else
+			in_word++;
+		str++;
+	}
+	return (words);
+}
+
+/**
+ * strtow - splits sentence into words
+ * @str: the sentence string
+ *
+ * Return: pointer to string array
+ */
 char **strtow(char *str)
 {
-char **split;
-int i, j = 0, temp = 0, size = 0, words = num_words(str);
+	int words = 0, in_word = 0;
+	char **ret, *word_start;
 
-if (words == 0)
-return (NULL);
-split = (char **) malloc(sizeof(char *) * (words + 1));
-if (split != NULL)
-{
-for (i = 0; i <= len(str) && words; i++)
-{
-if ((str[i] != ' ') && (str[i] != '\0'))
-size++;
-else if (((str[i] == ' ') || (str[i] == '\0')) && i && (str[i - 1] != ' '))
-{
-split[j] = (char *) malloc(sizeof(char) * size + 1);
-if (split[j] != NULL)
-{
-while (temp < size)
-{
-split[j][temp] = str[(i - size) +temp];
-temp++;
-}
-split[j][temp] = '\0';
-size = temp = 0;
-j++;
-}
-else
-{
-while (j-- >= 0)
-free(split[j]);
-free(split);
-return (NULL);
-}
-}
-}
-split[words] = NULL;
-return (split);
-}
-else
-return (NULL);
+	if (!str || !*str || !wordcount(str))
+		return (NULL);
+	ret = malloc(sizeof(char *) * (wordcount(str) + 1));
+	while (1)
+	{
+		if (*str == ' ' || !*str)
+		{
+			if (in_word)
+			{
+				ret[words] = malloc(sizeof(char) * (in_word + 1));
+				if (!ret[words])
+				{
+					return (NULL);
+				}
+				copychars(ret[words], word_start, str - 1);
+				words++;
+				in_word = 0;
+			}
+			if (!*str)
+				break;
+		}
+		else
+		{
+			if (!in_word++)
+				word_start = str;
+		}
+		str++;
+	}
+	ret[words] = 0;
+	return (ret);
 }
